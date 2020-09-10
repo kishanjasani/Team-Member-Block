@@ -7,7 +7,7 @@
  * Author URI:        http://kishanjasani.wordpress.com/
  * Version:           1.10.3
  * Requires at least: 5.2
- * Requires PHP:      7.2
+ * Requires PHP:      7.0
  * Text Domain:       team-member-block
  * Domain Path:       /languages
  */
@@ -56,8 +56,7 @@ function mytheme_blocks_register() {
 		plugins_url( 'dist/style.css', __FILE__ )
 	);
 
-	mytheme_blocks_register_block_type( 'firstblock' );
-	mytheme_blocks_register_block_type( 'secondblock' );
+	mytheme_blocks_register_block_type( 'team-member' );
 }
 
 add_action( 'init', 'mytheme_blocks_register' );
