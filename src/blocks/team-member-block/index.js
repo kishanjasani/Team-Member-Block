@@ -1,6 +1,7 @@
 import "./style.editor.scss";
 import { registerBlockType } from "@wordpress/blocks";
 import { __ } from "@wordpress/i18n";
+import TeamMemberEdit from "./edit";
 
 const attributes = {
 	title: {
@@ -36,9 +37,7 @@ registerBlockType("team-member-block/team-member", {
 		__("person", "team-member-block")
 	],
 	attributes,
-	edit: () => {
-		return null;
-	},
+	edit: TeamMemberEdit,
 	save: () => {
 		return null;
 	}
