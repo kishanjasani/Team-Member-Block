@@ -1,6 +1,8 @@
 import "./style.editor.scss";
 import { registerBlockType } from "@wordpress/blocks";
 import { __ } from "@wordpress/i18n";
+import { RichText } from "@wordpress/editor";
+
 import TeamMemberEdit from "./edit";
 
 const attributes = {
@@ -38,7 +40,29 @@ registerBlockType("team-member-block/team-member", {
 	],
 	attributes,
 	edit: TeamMemberEdit,
-	save: () => {
-		return null;
+	save: ({ className, attributes }) => {
+		const { title, info } = attributes;
+		return (
+			<div className={className}>
+				{title && (
+					<RichText.Content
+						className={
+							"wp-block-team-member-block-team-member__title"
+						}
+						tagName="h4"
+						value={title}
+					/>
+				)}
+				{info && (
+					<RichText.Content
+						className={
+							"wp-block-team-member-block-team-member__info"
+						}
+						tagName="p"
+						value={info}
+					/>
+				)}
+			</div>
+		);
 	}
 });
