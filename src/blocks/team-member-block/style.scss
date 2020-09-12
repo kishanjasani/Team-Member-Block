@@ -1,14 +1,30 @@
-.wp-block-team-member-block-team-member {
-	&__title {
-		color: #222;
-		font-size: 18px;
-		font-weight: bold;
-		margin-bottom: 0;
+.wp-block-team-member-block-team-members {
+	display: flex;
+	flex-wrap: wrap;
+	margin-right: -10px;
+	margin-left: -10px;
+
+	@for $i from 1 through 6 {
+		&.has-#{ $i }-columns {
+			.wp-block-team-member-block-team-member {
+				width: calc(100% / #{$i} - 20px);
+			}
+		}
 	}
 
-	&__info {
-		color: #565656;
-		font-weight: 300;
-		margin-bottom: 5px;
+	.wp-block-team-member-block-team-member {
+		margin: 10px;
+		&__title {
+			color: #222;
+			font-size: 18px;
+			font-weight: bold;
+			margin-bottom: 0;
+		}
+
+		&__info {
+			color: #565656;
+			font-weight: 300;
+			margin-bottom: 5px;
+		}
 	}
 }

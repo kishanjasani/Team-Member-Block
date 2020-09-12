@@ -40,6 +40,10 @@ registerBlockType("team-member-block/team-members", {
 				</InspectorControls>
 				<InnerBlocks
 					allowedBlocks={["team-member-block/team-member"]}
+					template={[
+						["team-member-block/team-member"],
+						["team-member-block/team-member"]
+					]}
 				/>
 			</div>
 		);
