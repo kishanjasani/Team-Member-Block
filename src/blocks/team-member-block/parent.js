@@ -20,6 +20,9 @@ registerBlockType("team-member-block/team-members", {
 		__("member", "team-member-block"),
 		__("person", "team-member-block")
 	],
+	supports: {
+		html: false
+	},
 	attributes,
 	edit: ({ className, attributes, setAttributes }) => {
 		const { columns } = attributes;

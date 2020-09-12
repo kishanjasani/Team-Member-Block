@@ -40,6 +40,10 @@ registerBlockType("team-member-block/team-member", {
 		__("person", "team-member-block")
 	],
 	parent: ["team-member-block/team-member"],
+	supports: {
+		reusable: false,
+		html: false
+	},
 	attributes,
 	edit: TeamMemberEdit,
 	save: ({ className, attributes }) => {
