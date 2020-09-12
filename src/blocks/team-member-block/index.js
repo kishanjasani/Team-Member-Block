@@ -1,4 +1,5 @@
 import "./style.editor.scss";
+import "./parent";
 import { registerBlockType } from "@wordpress/blocks";
 import { __ } from "@wordpress/i18n";
 import { RichText } from "@wordpress/editor";
@@ -38,6 +39,7 @@ registerBlockType("team-member-block/team-member", {
 		__("member", "team-member-block"),
 		__("person", "team-member-block")
 	],
+	parent: ["team-member-block/team-member"],
 	attributes,
 	edit: TeamMemberEdit,
 	save: ({ className, attributes }) => {
