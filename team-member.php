@@ -36,7 +36,7 @@ function mytheme_blocks_register() {
 	wp_register_script(
 		'team-member-block-editor-script',
 		plugins_url( 'dist/editor.js', __FILE__ ),
-		[ 'wp-blocks', 'wp-i18n', 'wp-editor', 'wp-components', 'wp-element' ]
+		[ 'wp-blocks', 'wp-i18n', 'wp-editor', 'wp-components', 'wp-element', 'wp-blob' ]
 	);
 
 	wp_register_script(

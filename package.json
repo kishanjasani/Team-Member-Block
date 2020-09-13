@@ -35,6 +35,7 @@
 	},
 	"homepage": "https://github.com/kishanjasani/gutenberg-scaffold#readme",
 	"dependencies": {
+		"@wordpress/blob": "^2.9.0",
 		"@wordpress/blocks": "^6.2.2",
 		"@wordpress/i18n": "^3.3.0",
 		"jquery": "^3.4.0",
