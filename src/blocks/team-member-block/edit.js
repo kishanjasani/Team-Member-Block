@@ -15,8 +15,10 @@ import {
 	Toolbar,
 	IconButton,
 	PanelBody,
-	TextareaControl
+	TextareaControl,
+	SelectControl
 } from "@wordpress/components";
+import { withSelect } from "@wordpress/data";
 
 class TeamMemberEdit extends Component {
 	componentDidMount() {
@@ -68,6 +70,31 @@ class TeamMemberEdit extends Component {
 		this.props.setAttributes({ alt });
 	};
 
+	getImageSizes = () => {
+		const { image, imageSizes } = this.props;
+		if (!image) return [];
+
+		let options = [];
+		const sizes = image.media_details.sizes;
+
+		for (const key in sizes) {
+			const size = sizes[key];
+			const imageSize = imageSizes.find(size => size.slug === key);
+
+			if (imageSize) {
+				options.push({
+					label: imageSize.name,
+					value: size.source_url
+				});
+			}
+		}
+		return options;
+	};
+
+	onImageSizeChange = url => {
+		this.props.setAttributes({ url });
+	};
+
 	render() {
 		const { className, attributes, noticeUI } = this.props;
 		const { title, info, url, alt, id } = attributes;
@@ -90,6 +117,14 @@ class TeamMemberEdit extends Component {
 									"Alternative Text describes your image to people who can't see it. Add a short description with it's key details.",
 									"team-member-block"
 								)}
+							/>
+						)}
+						{id && (
+							<SelectControl
+								label={__("Image Size", "team-member-block")}
+								options={this.getImageSizes()}
+								onChange={this.onImageSizeChange}
+								value={url}
 							/>
 						)}
 					</PanelBody>
@@ -171,4 +206,10 @@ class TeamMemberEdit extends Component {
 	}
 }
 
-export default withNotices(TeamMemberEdit);
+export default withSelect((select, props) => {
+	const id = props.attributes.id;
+	return {
+		image: id ? select("core").getMedia(id) : null,
+		imageSizes: select("core/editor").getEditorSettings().imageSizes
+	};
+})(withNotices(TeamMemberEdit));
