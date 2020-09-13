@@ -63,9 +63,16 @@ registerBlockType("team-member-block/team-member", {
 	attributes,
 	edit: TeamMemberEdit,
 	save: ({ className, attributes }) => {
-		const { title, info } = attributes;
+		const { title, info, url, alt, id } = attributes;
 		return (
 			<div className={className}>
+				{url && (
+					<img
+						src={url}
+						alt={alt}
+						className={id ? `wp-image-${id}` : null}
+					/>
+				)}
 				{title && (
 					<RichText.Content
 						className={
