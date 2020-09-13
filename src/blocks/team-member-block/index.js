@@ -32,6 +32,13 @@ const attributes = {
 		source: "attribute",
 		selector: "img",
 		attribute: "src"
+	},
+	social: {
+		type: "array",
+		default: [
+			{ link: "http://facebook.com", icon: "wordpress" },
+			{ link: "http://facebook.com", icon: "wordpress" }
+		]
 	}
 };
 

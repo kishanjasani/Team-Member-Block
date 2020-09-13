@@ -16,7 +16,9 @@ import {
 	IconButton,
 	PanelBody,
 	TextareaControl,
-	SelectControl
+	SelectControl,
+	Dashicon,
+	Tooltip
 } from "@wordpress/components";
 import { withSelect } from "@wordpress/data";
 
@@ -96,8 +98,8 @@ class TeamMemberEdit extends Component {
 	};
 
 	render() {
-		const { className, attributes, noticeUI } = this.props;
-		const { title, info, url, alt, id } = attributes;
+		const { className, attributes, noticeUI, isSelected } = this.props;
+		const { title, info, url, alt, id, social } = attributes;
 
 		return (
 			<>
@@ -200,6 +202,39 @@ class TeamMemberEdit extends Component {
 						placeholder={__("Member Info", "team-member-block")}
 						formattingControls={[]}
 					/>
+					<div
+						className={
+							"wp-block-team-member-block-team-member__social"
+						}
+					>
+						<ul>
+							{social.map((item, index) => {
+								return (
+									<li key={index}>
+										<Dashicon icon={item.icon} size={16} />
+									</li>
+								);
+							})}
+							{isSelected && (
+								<li
+									className={
+										"wp-block-team-member-block-team-member__addIconLI"
+									}
+								>
+									<Tooltip
+										text={__(
+											"Add Item",
+											"team-member-block"
+										)}
+									>
+										<button className="wp-block-team-member-block-team-member__addIconLI">
+											<Dashicon icon={"plus"} size={14} />
+										</button>
+									</Tooltip>
+								</li>
+							)}
+						</ul>
+					</div>
 				</div>
 			</>
 		);
