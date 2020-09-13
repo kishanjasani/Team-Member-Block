@@ -21,7 +21,8 @@ registerBlockType("team-member-block/team-members", {
 		__("person", "team-member-block")
 	],
 	supports: {
-		html: false
+		html: false,
+		align: ["wide", "full"]
 	},
 	attributes,
 	edit: ({ className, attributes, setAttributes }) => {
