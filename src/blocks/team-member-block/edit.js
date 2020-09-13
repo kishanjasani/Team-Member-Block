@@ -17,6 +17,14 @@ class TeamMemberEdit extends Component {
 		this.props.setAttributes({ id, url, alt });
 	};
 
+	onSelectUrl = url => {
+		this.props.setAttributes({
+			url,
+			id: null,
+			alt: ""
+		});
+	};
+
 	render() {
 		const { className, attributes } = this.props;
 		const { title, info, url, alt } = attributes;
@@ -32,7 +40,7 @@ class TeamMemberEdit extends Component {
 					<MediaPlaceholder
 						icon="format-image"
 						onSelect={this.onSelectImage}
-						// onSelectURL={url => console.log(url)}
+						onSelectURL={this.onSelectUrl}
 						// onError={error => console.log(error)}
 						accept="image/*"
 						allowedTypes={["image"]}
