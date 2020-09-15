@@ -23,6 +23,10 @@ import {
 import { withSelect } from "@wordpress/data";
 
 class TeamMemberEdit extends Component {
+	state = {
+		selectedLink: null
+	};
+
 	componentDidMount() {
 		const { attributes, setAttributes } = this.props;
 		const { url, id } = attributes;
@@ -31,6 +35,14 @@ class TeamMemberEdit extends Component {
 			setAttributes({
 				url: "",
 				alt: ""
+			});
+		}
+	}
+
+	componentDidUpdate(prevProps) {
+		if (prevProps.isSelected && !this.props.isSelected) {
+			this.setState({
+				selectedLink: null
 			});
 		}
 	}
@@ -91,6 +103,17 @@ class TeamMemberEdit extends Component {
 			}
 		}
 		return options;
+	};
+
+	addNewLink = () => {
+		const { setAttributes, attributes } = this.props;
+		const { social } = attributes;
+		setAttributes({
+			social: [...social, { icon: "wordpress", link: "" }]
+		});
+		this.setState({
+			selectedLink: social.length
+		});
 	};
 
 	onImageSizeChange = url => {
@@ -210,7 +233,19 @@ class TeamMemberEdit extends Component {
 						<ul>
 							{social.map((item, index) => {
 								return (
-									<li key={index}>
+									<li
+										className={
+											this.state.selectedLink === index
+												? "is-selected"
+												: null
+										}
+										key={index}
+										onClick={() =>
+											this.setState({
+												selectedLink: index
+											})
+										}
+									>
 										<Dashicon icon={item.icon} size={16} />
 									</li>
 								);
@@ -227,7 +262,10 @@ class TeamMemberEdit extends Component {
 											"team-member-block"
 										)}
 									>
-										<button className="wp-block-team-member-block-team-member__addIconLI">
+										<button
+											className="wp-block-team-member-block-team-member__addIconLI"
+											onClick={this.addNewLink}
+										>
 											<Dashicon icon={"plus"} size={14} />
 										</button>
 									</Tooltip>
