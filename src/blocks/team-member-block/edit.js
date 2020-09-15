@@ -5,7 +5,8 @@ import {
 	BlockControls,
 	MediaUpload,
 	MediaUploadCheck,
-	InspectorControls
+	InspectorControls,
+	URLInput
 } from "@wordpress/editor";
 import { __ } from "@wordpress/i18n";
 import { isBlobURL } from "@wordpress/blob";
@@ -18,7 +19,8 @@ import {
 	TextareaControl,
 	SelectControl,
 	Dashicon,
-	Tooltip
+	Tooltip,
+	TextControl
 } from "@wordpress/components";
 import { withSelect } from "@wordpress/data";
 
@@ -273,6 +275,27 @@ class TeamMemberEdit extends Component {
 							)}
 						</ul>
 					</div>
+					{this.state.selectedLink !== null && (
+						<div
+							className={
+								"wp-block-team-member-block-team-member__linkForm"
+							}
+						>
+							<TextControl
+								label={__("Icon", "team-member-block")}
+							/>
+
+							<URLInput label={__("URL", "team-member-block")} />
+
+							<a
+								className={
+									"wp-block-team-member-block-team-member__removeLink"
+								}
+							>
+								{__("Remove Link", "team-member-block")}
+							</a>
+						</div>
+					)}
 				</div>
 			</>
 		);
