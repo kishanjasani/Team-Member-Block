@@ -122,6 +122,17 @@ class TeamMemberEdit extends Component {
 		this.props.setAttributes({ url });
 	};
 
+	updateSocialItem = (type, value) => {
+		const { setAttributes, attributes } = this.props;
+		const { social } = attributes;
+		const { selectedLink } = this.state;
+
+		let newSocial = [...social];
+		newSocial[selectedLink][type] = value;
+
+		setAttributes({ social: newSocial });
+	};
+
 	render() {
 		const { className, attributes, noticeUI, isSelected } = this.props;
 		const { title, info, url, alt, id, social } = attributes;
@@ -283,9 +294,19 @@ class TeamMemberEdit extends Component {
 						>
 							<TextControl
 								label={__("Icon", "team-member-block")}
+								value={social[this.state.selectedLink].icon}
+								onChange={icon =>
+									this.updateSocialItem("icon", icon)
+								}
 							/>
 
-							<URLInput label={__("URL", "team-member-block")} />
+							<URLInput
+								label={__("URL", "team-member-block")}
+								value={social[this.state.selectedLink].link}
+								onChange={link =>
+									this.updateSocialItem("link", link)
+								}
+							/>
 
 							<a
 								className={
