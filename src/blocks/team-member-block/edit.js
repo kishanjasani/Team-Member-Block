@@ -133,6 +133,24 @@ class TeamMemberEdit extends Component {
 		setAttributes({ social: newSocial });
 	};
 
+	removeLink = e => {
+		e.preventDefault();
+		const { setAttributes, attributes } = this.props;
+		const { social } = attributes;
+		const { selectedLink } = this.state;
+
+		setAttributes({
+			social: [
+				...social.slice(0, selectedLink),
+				...social.slice(selectedLink + 1)
+			]
+		});
+
+		this.setState({
+			selectedLink: null
+		});
+	};
+
 	render() {
 		const { className, attributes, noticeUI, isSelected } = this.props;
 		const { title, info, url, alt, id, social } = attributes;
@@ -312,6 +330,7 @@ class TeamMemberEdit extends Component {
 								className={
 									"wp-block-team-member-block-team-member__removeLink"
 								}
+								onClick={this.removeLink}
 							>
 								{__("Remove Link", "team-member-block")}
 							</a>
