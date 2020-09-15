@@ -39,7 +39,20 @@ const attributes = {
 		default: [
 			{ link: "http://facebook.com", icon: "wordpress" },
 			{ link: "http://facebook.com", icon: "wordpress" }
-		]
+		],
+		source: "query",
+		selector: ".wp-block-team-member-block-team-member__social ul li",
+		query: {
+			icon: {
+				source: "attribute",
+				attribute: "data-icon"
+			},
+			link: {
+				source: "attribute",
+				selector: "a",
+				attribute: "href"
+			}
+		}
 	}
 };
 
