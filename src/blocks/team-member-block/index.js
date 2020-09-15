@@ -5,6 +5,7 @@ import { __ } from "@wordpress/i18n";
 import { RichText } from "@wordpress/editor";
 
 import TeamMemberEdit from "./edit";
+import { Dashicon } from "@wordpress/components";
 
 const attributes = {
 	title: {
@@ -70,7 +71,7 @@ registerBlockType("team-member-block/team-member", {
 	attributes,
 	edit: TeamMemberEdit,
 	save: ({ className, attributes }) => {
-		const { title, info, url, alt, id } = attributes;
+		const { title, info, url, alt, id, social } = attributes;
 		return (
 			<div className={className}>
 				{url && (
@@ -97,6 +98,32 @@ registerBlockType("team-member-block/team-member", {
 						tagName="p"
 						value={info}
 					/>
+				)}
+				{social.length > 0 && (
+					<div
+						className={
+							"wp-block-team-member-block-team-member__social"
+						}
+					>
+						<ul>
+							{social.map((item, index) => {
+								return (
+									<li key={index} data-icon={item.icon}>
+										<a
+											href={item.link}
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											<Dashicon
+												icon={item.icon}
+												size={16}
+											/>
+										</a>
+									</li>
+								);
+							})}
+						</ul>
+					</div>
 				)}
 			</div>
 		);
